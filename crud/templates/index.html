@@ -1,10 +1,109 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <title>Simple Students Management System </title>
-        <meta charset="utf-8" />
-    </head>
-    <body>
-        <h1>Simple Students Management System </h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Students Management System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="container" id="main_vue">
+        <button type="button" class="btn btn-primary mt-5 mb-5 float-right" data-toggle="modal" data-target="#exampleModal">
+          Novo Estudante
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Novo Estudante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form @submit.prevent="formSubmit($event)">
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nome</label>
+                        <input type="text" v-model="Crud.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite o nome">
+                        <small id="emailHelp" class="form-text text-danger" v-text="errors.get('name')"></small>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Mat</label>
+                        <input type="text" v-model="Crud.roll"  class="form-control" id="exampleInputPassword1" placeholder="Matrícula">
+                        <small id="emailHelp" class="form-text text-danger" v-text="errors.get('roll')"></small>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" @click="ClearData()"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary">Salvar Mudanças</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="exampleModalTwo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Editar Estudante</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form @submit.prevent="UpdateSubmit($event)">
+  
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Nome</label>
+                          <input type="text" v-model="EditCrud.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite o nome">
+                          <small id="emailHelp" class="form-text text-danger" v-text="errors.get('name')"></small>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Mat</label>
+                          <input type="text" v-model="EditCrud.roll"  class="form-control" id="exampleInputPassword1" placeholder="Matrícula">
+                          <small id="emailHelp" class="form-text text-danger" v-text="errors.get('roll')"></small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                      </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" @click="ClearData()"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          
+    </div>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{% static 'js/vue.min.js' %}"></script>
+        <script src="{% static 'js/error.js' %}"></script>
+        <script type="text/javascript">
+            var csrf='{{ csrf_token }}';
+        </script>
+        <script src="{% static 'js/crud.js' %}"></script>
     </body>
 </html>
