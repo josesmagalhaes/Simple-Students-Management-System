@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Simple Students Management System</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <title>Simple Students Management System</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"/>
 
 </head>
 <body>
@@ -49,104 +49,113 @@
           </div>
         </div>
 
+
         <div class="modal fade" id="exampleModalTwo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Editar Estudante</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form @submit.prevent="UpdateSubmit($event)">
-  
-                        <div class="form-group">
-                          <label for="exampleInputEmail1">Nome</label>
-                          <input type="text" v-model="EditCrud.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite o nome">
-                          <small id="emailHelp" class="form-text text-danger" v-text="errors.get('name')"></small>
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleInputPassword1">Mat</label>
-                          <input type="text" v-model="EditCrud.roll"  class="form-control" id="exampleInputPassword1" placeholder="Matrícula">
-                          <small id="emailHelp" class="form-text text-danger" v-text="errors.get('roll')"></small>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Atualizar</button>
-                      </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" @click="ClearData()"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Estudante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form @submit.prevent="UpdateSubmit($event)">
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nome</label>
+                        <input type="text" v-model="EditCrud.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite o nome">
+                        <small id="emailHelp" class="form-text text-danger" v-text="errors.get('name')"></small>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Mat</label>
+                        <input type="text" v-model="EditCrud.roll"  class="form-control" id="exampleInputPassword1" placeholder="Matrícula">
+                        <small id="emailHelp" class="form-text text-danger" v-text="errors.get('roll')"></small>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Atualizar</button>
+                    </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" @click="ClearData()"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
               </div>
             </div>
           </div>
-          <div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel" v-text="ViewCrud.name + ' ' + ' Details'"></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <table class="table table-striped">
-                      <tr>
-                          <td>Nome : </td>
-                          <td v-text="ViewCrud.name"></td>
-                      </tr>
-                       <tr>
-                          <td>Matrícula : </td>
-                          <td v-text="ViewCrud.roll"></td>
-                      </tr>
-                      <tr>
-                          <td>Criado em : </td>
-                          <td v-text="ViewCrud.created_at"></td>
-                      </tr>
-                      <tr>
-                          <td>Atualizado em : </td>
-                          <td v-text="ViewCrud.updated_at"></td>
-                      </tr>
-                  </table>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+
+
+        <div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" v-text="ViewCrud.name + ' ' + ' Details'"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Nome : </td>
+                            <td v-text="ViewCrud.name"></td>
+                        </tr>
+                         <tr>
+                            <td>Matrícula : </td>
+                            <td v-text="ViewCrud.roll"></td>
+                        </tr>
+                        <tr>
+                            <td>Criado em : </td>
+                            <td v-text="ViewCrud.created_at"></td>
+                        </tr>
+                        <tr>
+                            <td>Atualizado em : </td>
+                            <td v-text="ViewCrud.updated_at"></td>
+                        </tr>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <table class="table table-striped" style="margin-top: 5px;">
-            <thead>
-              <tr><input class="form-control" v-model="search"/></tr>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Mat</th>
-                <th scope="col">Ação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-if="AllData.length > 0" v-for="(data, index) in filteredList">
-                <th scope="row" v-text="index+1"></th>
-                <td v-text="data.name"></td>
-                <td v-text="data.roll"></td>
-                <td>
-                  <button class="btn btn-danger" @click="Delete(index,data.id)">Deletar</button>
-                  <button class="btn btn-info" @click="Edit(index,data)">Editar</button>
-                  <button class="btn btn-primary"  @click="View(index,data)">Ver</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>         
-      </div>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="{% static 'js/vue.min.js' %}"></script>
-        <script src="{% static 'js/error.js' %}"></script>
-        <script type="text/javascript">
-            var csrf='{{ csrf_token }}';
-        </script>
-        <script src="{% static 'js/crud.js' %}"></script>
-    </body>
+
+
+<table class="table table-striped" style="margin-top: 5px;">
+  <thead>
+    <tr><input class="form-control" v-model="search"/></tr>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Mat</th>
+      <th scope="col">Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-if="AllData.length > 0" v-for="(data, index) in filteredList">
+      <th scope="row" v-text="index+1"></th>
+      <td v-text="data.name"></td>
+      <td v-text="data.roll"></td>
+      <td>
+        <button class="btn btn-danger" @click="Delete(index,data.id)">Deletar</button>
+        <button class="btn btn-info" @click="Edit(index,data)">Editar</button>
+        <button class="btn btn-primary"  @click="View(index,data)">Ver</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{% static 'js/vue.min.js' %}"></script>
+<script src="{% static 'js/error.js' %}"></script>
+<script type="text/javascript">
+var csrf='{{ csrf_token }}';
+</script>
+<script src="{% static 'js/crud.js' %}"></script>
+</body>
 </html>
