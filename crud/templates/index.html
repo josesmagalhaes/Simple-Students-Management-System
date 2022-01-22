@@ -80,22 +80,65 @@
               </div>
             </div>
           </div>
-
-          
-          
-    </div>
-</div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+          <div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" v-text="ViewCrud.name + ' ' + ' Details'"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-striped">
+                      <tr>
+                          <td>Nome : </td>
+                          <td v-text="ViewCrud.name"></td>
+                      </tr>
+                       <tr>
+                          <td>Matrícula : </td>
+                          <td v-text="ViewCrud.roll"></td>
+                      </tr>
+                      <tr>
+                          <td>Criado em : </td>
+                          <td v-text="ViewCrud.created_at"></td>
+                      </tr>
+                      <tr>
+                          <td>Atualizado em : </td>
+                          <td v-text="ViewCrud.updated_at"></td>
+                      </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table class="table table-striped" style="margin-top: 5px;">
+            <thead>
+              <tr><input class="form-control" v-model="search"/></tr>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Mat</th>
+                <th scope="col">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-if="AllData.length > 0" v-for="(data, index) in filteredList">
+                <th scope="row" v-text="index+1"></th>
+                <td v-text="data.name"></td>
+                <td v-text="data.roll"></td>
+                <td>
+                  <button class="btn btn-danger" @click="Delete(index,data.id)">Deletar</button>
+                  <button class="btn btn-info" @click="Edit(index,data)">Editar</button>
+                  <button class="btn btn-primary"  @click="View(index,data)">Ver</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>         
+      </div>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
